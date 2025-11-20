@@ -1,6 +1,7 @@
 package atm.state;
 
 import atm.ATM;
+import note.NoteFactory;
 
 public class EstadoSemCartao implements ATMState {
 
@@ -28,6 +29,12 @@ public class EstadoSemCartao implements ATMState {
 
     @Override
     public void solicitarSaque(int valor) {
+        if (NoteFactory.atmEmpty()) {
+            System.out.println("ATM sem dinheiro. Operações indisponíveis.");
+            atm.setEstadoAtual(atm.getEstadoSemDinheiro());
+            return;
+        }
+
         System.out.println("Insira um cartão primeiro.");
     }
 }

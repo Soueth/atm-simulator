@@ -1,6 +1,10 @@
 package atm.state;
 
 import atm.ATM;
+import chainOfResponsability.DispenserChainBuilder;
+import exceptions.CantDispense;
+import interfaces.IDispenser;
+import note.NoteFactory;
 
 public class EstadoAutenticado implements ATMState {
 
@@ -38,8 +42,21 @@ public class EstadoAutenticado implements ATMState {
             return;
         }
 
+        if (NoteFactory.atmEmpty()) {
+            System.out.println("ATM sem dinheiro. Operações indisponíveis.");
+            atm.setEstadoAtual(atm.getEstadoSemDinheiro());
+            return;
+        }
         // Aqui o colega do Chain vai implementar a lógica depois
-        System.out.println("Solicitação de saque recebida (pendente Chain of Responsibility).");
+        // System.out.println("Solicitação de saque recebida (pendente Chain of Responsibility).");
+        IDispenser dispenser = DispenserChainBuilder.build();
+
+        try {
+            System.out.println("Solicitando: R$" + valor);
+            dispenser.dispense(valor);
+        } catch (CantDispense e) {
+            System.out.println(e.getMessage());
+        }
 
         atm.debitarConta(valor);
         System.out.println("Saldo atualizado: R$" + atm.getSaldoConta());
