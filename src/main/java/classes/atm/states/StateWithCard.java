@@ -4,49 +4,49 @@ import classes.atm.ATM;
 import classes.notes.NoteFactory;
 import interfaces.ATMState;
 
-public class EstadoComCartao implements ATMState {
+public class StateWithCard implements ATMState {
 
     private ATM atm;
     private int tentativas = 0;
     private final int MAX_TENTATIVAS = 3;
 
-    public EstadoComCartao(ATM atm) {
+    public StateWithCard(ATM atm) {
         this.atm = atm;
     }
 
     @Override
-    public void inserirCartao() {
+    public void insertCard() {
         System.out.println("Já existe um cartão inserido.");
     }
 
     @Override
-    public void ejetarCartao() {
+    public void ejectCard() {
         System.out.println("Retire seu cartão.");
-        atm.setEstadoAtual(atm.getEstadoSemCartao());
+        atm.setEstadoAtual(atm.getStateNoCard());
         tentativas = 0;
     }
 
     @Override
-    public void inserirPIN(String pin) {
+    public void insertPIN(String pin) {
         if (atm.validarPIN(pin)) {
             System.out.println("PIN correto. Escolha uma operação.");
-            atm.setEstadoAtual(atm.getEstadoAutenticado());
+            atm.setEstadoAtual(atm.getStateAuthenticated());
             tentativas = 0;
         } else {
             tentativas++;
             System.out.println("PIN incorreto. Tentativa " + tentativas + "/" + MAX_TENTATIVAS);
             if (tentativas >= MAX_TENTATIVAS) {
                 System.out.println("Máximo de tentativas atingido. Cartão ejetado.");
-                atm.setEstadoAtual(atm.getEstadoSemCartao());
+                atm.setEstadoAtual(atm.getStateNoCard());
             }
         }
     }
 
     @Override
-    public void solicitarSaque(int valor) {
+    public void requestWithdraw(int valor) {
         if (NoteFactory.atmEmpty()) {
-            System.out.println("ATM sem dinheiro. Operações indisponíveis.");
-            atm.setEstadoAtual(atm.getEstadoSemDinheiro());
+            atm.setEstadoAtual(atm.getStateNoMoney());
+            atm.requestWithdraw(valor);
             return;
         }
         

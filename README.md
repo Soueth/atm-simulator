@@ -15,10 +15,10 @@ Mapeamento rápido das classes
 
 - Padrão State:
   - `classes/atm/ATM.java`
-  - `EstadoSemCartao.java`
-  - `EstadoComCartao.java`
-  - `EstadoAutenticado.java`
-  - `EstadoSemDinheiro.java`
+  - `StateNoCard.java`
+  - `StateWithCard.java`
+  - `StateAuthenticated.java`
+  - `StateNoMoney.java`
   - Interface: `interfaces/ATMState.java`
 
 - Padrão Chain Of Responsibility:
@@ -41,9 +41,9 @@ Outros componentes importantes
 Exemplos de fluxo (resumo)
 
 - Retirada usando State + Chain:
-  1. Usuário insere cartão → `ATM` delega para o estado atual (ex.: `EstadoSemCartao`) para aceitar o cartão.
-  2. Usuário autentica → `EstadoComCartao` passa para `EstadoAutenticado` após validação.
-  3. Usuário solicita saque → `EstadoAutenticado` verifica saldo e delega ao `DispenserChain` (montado por `DispenserChainBuilder`).
+  1. Usuário insere cartão → `ATM` delega para o estado atual (ex.: `StateNoCard`) para aceitar o cartão.
+  2. Usuário autentica → `StateWithCard` passa para `StateAuthenticated` após validação.
+  3. Usuário solicita saque → `StateAuthenticated` verifica saldo e delega ao `DispenserChain` (montado por `DispenserChainBuilder`).
   4. Cada `Dispenser` da cadeia tenta atender a parte do valor; se algum valor não puder ser dispensado, a exceção `CantDispense` é lançada.
 
 - Depósito usando Factory:

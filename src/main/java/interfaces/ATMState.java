@@ -1,8 +1,8 @@
 package interfaces;
 
 public interface ATMState {
-    void inserirCartao();
-    void ejetarCartao();
-    void inserirPIN(String pin);
-    void solicitarSaque(int valor);
+    void insertCard();
+    void ejectCard();
+    void insertPIN(String pin);
+    void requestWithdraw(int valor);
 }

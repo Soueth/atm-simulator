@@ -25,20 +25,20 @@ public class App
             NoteFactory.get(NoteValue.TWO).deposit(30);
             NoteFactory.get(NoteValue.ONE).deposit(2);
 
-            atm.setEstadoAtual(atm.getEstadoSemCartao());
+            atm.setEstadoAtual(atm.getStateNoCard());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
         System.out.println("======================================= ATM =======================================\n");
 
-        atm.inserirCartao();
+        atm.insertCard();
         System.out.println("\n•••\n");
-        atm.inserirPIN("1234");
+        atm.insertPIN("1234");
         System.out.println("\n•••\n");
-        atm.solicitarSaque(347);
+        atm.requestWithdraw(347);
         System.out.println("Ejete o cartão.");
-        atm.ejetarCartao();
+        atm.ejectCard();
 
         System.out.println("============================ OBRIGADO PELA PREFERÊNCIA ============================");
     }

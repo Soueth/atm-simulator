@@ -1,7 +1,5 @@
 package classes.notes;
 
-// import java.util.UUID;
-
 import enums.NoteValue;
 import exceptions.DepositLessZeroException;
 import exceptions.RemoveMoreHaveException;

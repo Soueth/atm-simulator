@@ -7,32 +7,32 @@ import exceptions.CantDispense;
 import interfaces.ATMState;
 import interfaces.IDispenser;
 
-public class EstadoAutenticado implements ATMState {
+public class StateAuthenticated implements ATMState {
 
     private ATM atm;
 
-    public EstadoAutenticado(ATM atm) {
+    public StateAuthenticated(ATM atm) {
         this.atm = atm;
     }
 
     @Override
-    public void inserirCartao() {
+    public void insertCard() {
         System.out.println("Já existe um cartão inserido.");
     }
 
     @Override
-    public void ejetarCartao() {
+    public void ejectCard() {
         System.out.println("Retire seu cartão.");
-        atm.setEstadoAtual(atm.getEstadoSemCartao());
+        atm.setEstadoAtual(atm.getStateNoCard());
     }
 
     @Override
-    public void inserirPIN(String pin) {
+    public void insertPIN(String pin) {
         System.out.println("Você já está autenticado.");
     }
 
     @Override
-    public void solicitarSaque(int valor) {
+    public void requestWithdraw(int valor) {
         if (valor <= 0) {
             System.out.println("Valor inválido.");
             return;
@@ -44,12 +44,10 @@ public class EstadoAutenticado implements ATMState {
         }
 
         if (NoteFactory.atmEmpty()) {
-            System.out.println("ATM sem dinheiro. Operações indisponíveis.");
-            atm.setEstadoAtual(atm.getEstadoSemDinheiro());
+            atm.setEstadoAtual(atm.getStateNoMoney());
+            atm.requestWithdraw(valor);
             return;
         }
-        // Aqui o colega do Chain vai implementar a lógica depois
-        // System.out.println("Solicitação de saque recebida (pendente Chain of Responsibility).");
         IDispenser dispenser = DispenserChainBuilder.build();
 
         try {

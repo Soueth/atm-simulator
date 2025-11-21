@@ -4,35 +4,35 @@ import classes.atm.ATM;
 import classes.notes.NoteFactory;
 import interfaces.ATMState;
 
-public class EstadoSemCartao implements ATMState {
+public class StateNoCard implements ATMState {
 
     private ATM atm;
 
-    public EstadoSemCartao(ATM atm) {
+    public StateNoCard(ATM atm) {
         this.atm = atm;
     }
 
     @Override
-    public void inserirCartao() {
+    public void insertCard() {
         System.out.println("Cartão inserido. Por favor, digite seu PIN.");
-        atm.setEstadoAtual(atm.getEstadoComCartao());
+        atm.setEstadoAtual(atm.getStateWithCard());
     }
 
     @Override
-    public void ejetarCartao() {
+    public void ejectCard() {
         System.out.println("Nenhum cartão inserido.");
     }
 
     @Override
-    public void inserirPIN(String pin) {
+    public void insertPIN(String pin) {
         System.out.println("Insira um cartão primeiro.");
     }
 
     @Override
-    public void solicitarSaque(int valor) {
+    public void requestWithdraw(int valor) {
         if (NoteFactory.atmEmpty()) {
-            System.out.println("ATM sem dinheiro. Operações indisponíveis.");
-            atm.setEstadoAtual(atm.getEstadoSemDinheiro());
+            atm.setEstadoAtual(atm.getStateNoMoney());
+            atm.requestWithdraw(valor);
             return;
         }
 
