@@ -1,13 +1,13 @@
-package chainOfResponsability;
+package classes.chainOfResponsability;
 
-import chainOfResponsability.dispensers.Dispenser1;
-import chainOfResponsability.dispensers.Dispenser10;
-import chainOfResponsability.dispensers.Dispenser100;
-import chainOfResponsability.dispensers.Dispenser2;
-import chainOfResponsability.dispensers.Dispenser20;
-import chainOfResponsability.dispensers.Dispenser200;
-import chainOfResponsability.dispensers.Dispenser5;
-import chainOfResponsability.dispensers.Dispenser50;
+import classes.chainOfResponsability.dispensers.Dispenser1;
+import classes.chainOfResponsability.dispensers.Dispenser10;
+import classes.chainOfResponsability.dispensers.Dispenser100;
+import classes.chainOfResponsability.dispensers.Dispenser2;
+import classes.chainOfResponsability.dispensers.Dispenser20;
+import classes.chainOfResponsability.dispensers.Dispenser200;
+import classes.chainOfResponsability.dispensers.Dispenser5;
+import classes.chainOfResponsability.dispensers.Dispenser50;
 import interfaces.IDispenser;
 
 public class DispenserChainBuilder {

@@ -1,4 +1,4 @@
-package atm.state;
+package interfaces;
 
 public interface ATMState {
     void inserirCartao();

@@ -1,6 +1,7 @@
-package atm.state;
+package classes.atm.states;
 
-import atm.ATM;
+import classes.atm.ATM;
+import interfaces.ATMState;
 
 public class EstadoSemDinheiro implements ATMState {
 

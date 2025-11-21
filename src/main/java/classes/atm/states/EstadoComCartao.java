@@ -1,7 +1,8 @@
-package atm.state;
+package classes.atm.states;
 
-import atm.ATM;
-import note.NoteFactory;
+import classes.atm.ATM;
+import classes.notes.NoteFactory;
+import interfaces.ATMState;
 
 public class EstadoComCartao implements ATMState {
 

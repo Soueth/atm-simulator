@@ -1,6 +1,7 @@
-package atm;
+package classes.atm;
 
-import atm.state.*;
+import classes.atm.states.*;
+import interfaces.ATMState;
 
 public class ATM {
 

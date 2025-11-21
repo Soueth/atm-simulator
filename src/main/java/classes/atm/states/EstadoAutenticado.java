@@ -1,10 +1,11 @@
-package atm.state;
+package classes.atm.states;
 
-import atm.ATM;
-import chainOfResponsability.DispenserChainBuilder;
+import classes.atm.ATM;
+import classes.chainOfResponsability.DispenserChainBuilder;
+import classes.notes.NoteFactory;
 import exceptions.CantDispense;
+import interfaces.ATMState;
 import interfaces.IDispenser;
-import note.NoteFactory;
 
 public class EstadoAutenticado implements ATMState {
 

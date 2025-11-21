@@ -1,6 +1,6 @@
-package chainOfResponsability.dispensers;
+package classes.chainOfResponsability.dispensers;
 
-import chainOfResponsability.AbstractDispenser;
+import classes.chainOfResponsability.AbstractDispenser;
 import enums.NoteValue;
 
 public class Dispenser50 extends AbstractDispenser {

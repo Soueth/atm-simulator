@@ -1,8 +1,8 @@
 // package com.exemplo;
 
-import atm.ATM;
+import classes.atm.ATM;
+import classes.notes.NoteFactory;
 import enums.NoteValue;
-import note.NoteFactory;
 
 /**
  * Hello world!
@@ -35,7 +35,7 @@ public class App
         atm.inserirCartao();
         System.out.println("\n•••\n");
         atm.inserirPIN("1234");
-        System.out.println("\n••••\n");
+        System.out.println("\n•••\n");
         atm.solicitarSaque(347);
         System.out.println("Ejete o cartão.");
         atm.ejetarCartao();

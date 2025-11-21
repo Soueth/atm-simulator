@@ -1,4 +1,4 @@
-package note;
+package classes.notes;
 
 import java.util.Map;
 import enums.NoteValue;

@@ -1,10 +1,10 @@
-package chainOfResponsability;
+package classes.chainOfResponsability;
 
+import classes.notes.ConcreteNote;
+import classes.notes.NoteFactory;
 import enums.NoteValue;
 import exceptions.CantDispense;
 import interfaces.IDispenser;
-import note.ConcreteNote;
-import note.NoteFactory;
 
 public abstract class AbstractDispenser implements IDispenser {
 
