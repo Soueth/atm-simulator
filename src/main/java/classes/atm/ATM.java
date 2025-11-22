@@ -13,9 +13,9 @@ public class ATM {
     private ATMState stateAuthenticated;
     private ATMState stateNoMoney;
 
-    private ATMState estadoAtual;
+    private ATMState actualState;
 
-    private int saldoConta = 2000;
+    private double accountBalance = 2000;
     private final String PIN_CORRETO = "1234";
 
     public ATM() {
@@ -24,7 +24,7 @@ public class ATM {
         stateAuthenticated = new StateAuthenticated(this);
         stateNoMoney = new StateNoMoney(this);
 
-        estadoAtual = stateNoCard;
+        actualState = stateNoCard;
     }
 
     // getters dos estados
@@ -44,41 +44,45 @@ public class ATM {
         return stateNoMoney;
     }
 
-    public ATMState getEstadoAtual() {
-        return estadoAtual;
+    public ATMState getActualState() {
+        return actualState;
     }
 
-    public void setEstadoAtual(ATMState estado) {
-        this.estadoAtual = estado;
+    public void setActualState(ATMState estado) {
+        this.actualState = estado;
     }
 
     // Métodos delegados
     public void insertCard() {
-        estadoAtual.insertCard();
+        actualState.insertCard();
     }
 
     public void ejectCard() {
-        estadoAtual.ejectCard();
+        actualState.ejectCard();
     }
 
     public void insertPIN(String pin) throws WrongPINEjectCardException {
-        estadoAtual.insertPIN(pin);
+        actualState.insertPIN(pin);
     }
 
     public void requestWithdraw(int valor) throws InvalidValueException, InsuficientBalanceException {
-        estadoAtual.requestWithdraw(valor);
+        actualState.requestWithdraw(valor);
     }
 
     // Funções auxiliares
-    public boolean validarPIN(String pin) {
+    public boolean validatePIN(String pin) {
         return PIN_CORRETO.equals(pin);
     }
 
-    public int getSaldoConta() {
-        return saldoConta;
+    public double getAccountBalance() {
+        return accountBalance;
     }
 
-    public void debitarConta(int valor) {
-        saldoConta -= valor;
+    public void debitAccount(int valor) {
+        accountBalance -= valor;
+    }
+
+    public String getStateName() {
+        return actualState.getStateName();
     }
 }

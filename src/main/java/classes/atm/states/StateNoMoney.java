@@ -30,4 +30,9 @@ public class StateNoMoney implements ATMState {
     public void requestWithdraw(int valor) {
         System.out.println("ATM sem dinheiro. Operações indisponíveis.");
     }
+
+    @Override
+    public String getStateName() {
+        return "SEM DINHEIRO";
+    }
 }

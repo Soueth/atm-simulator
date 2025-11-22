@@ -25,15 +25,15 @@ public class StateWithCard implements ATMState {
     @Override
     public void ejectCard() {
         System.out.println("Retire seu cartão.");
-        atm.setEstadoAtual(atm.getStateNoCard());
+        atm.setActualState(atm.getStateNoCard());
         tentativas = 0;
     }
 
     @Override
     public void insertPIN(String pin) throws WrongPINEjectCardException {
-        if (atm.validarPIN(pin)) {
+        if (atm.validatePIN(pin)) {
             System.out.println("PIN correto. Escolha uma operação.");
-            atm.setEstadoAtual(atm.getStateAuthenticated());
+            atm.setActualState(atm.getStateAuthenticated());
             tentativas = 0;
         } else {
             tentativas++;
@@ -41,7 +41,7 @@ public class StateWithCard implements ATMState {
                 System.out.println("PIN incorreto. Tentativa " + tentativas + "/" + MAX_TENTATIVAS);
                 return;
             }
-            atm.setEstadoAtual(atm.getStateNoCard());
+            atm.setActualState(atm.getStateNoCard());
             throw new WrongPINEjectCardException();
         }
     }
@@ -49,11 +49,16 @@ public class StateWithCard implements ATMState {
     @Override
     public void requestWithdraw(int valor) throws InvalidValueException, InsuficientBalanceException {
         if (NoteFactory.atmEmpty()) {
-            atm.setEstadoAtual(atm.getStateNoMoney());
+            atm.setActualState(atm.getStateNoMoney());
             atm.requestWithdraw(valor);
             return;
         }
         
         System.out.println("Digite o PIN antes de solicitar saque.");
+    }
+
+    @Override
+    public String getStateName() {
+        return "COM CARTÃO";
     }
 }

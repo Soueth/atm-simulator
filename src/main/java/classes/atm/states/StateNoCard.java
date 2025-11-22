@@ -17,7 +17,7 @@ public class StateNoCard implements ATMState {
     @Override
     public void insertCard() {
         System.out.println("Cartão inserido. Por favor, digite seu PIN.");
-        atm.setEstadoAtual(atm.getStateWithCard());
+        atm.setActualState(atm.getStateWithCard());
     }
 
     @Override
@@ -33,11 +33,16 @@ public class StateNoCard implements ATMState {
     @Override
     public void requestWithdraw(int valor) throws InvalidValueException, InsuficientBalanceException {
         if (NoteFactory.atmEmpty()) {
-            atm.setEstadoAtual(atm.getStateNoMoney());
+            atm.setActualState(atm.getStateNoMoney());
             atm.requestWithdraw(valor);
             return;
         }
 
         System.out.println("Insira um cartão primeiro.");
+    }
+
+    @Override
+    public String getStateName() {
+        return "SEM CARTÃO";
     }
 }

@@ -1,13 +1,13 @@
 package classes.atm.states;
 
 import classes.atm.ATM;
-import classes.chainOfResponsability.DispenserChainBuilder;
+import classes.chainOfResponsability.HandlerChainBuilder;
 import classes.notes.NoteFactory;
 import exceptions.CantDispense;
 import exceptions.InsuficientBalanceException;
 import exceptions.InvalidValueException;
 import interfaces.ATMState;
-import interfaces.IDispenser;
+import interfaces.IHandler;
 
 public class StateAuthenticated implements ATMState {
 
@@ -25,7 +25,7 @@ public class StateAuthenticated implements ATMState {
     @Override
     public void ejectCard() {
         System.out.println("Retire seu cartão.");
-        atm.setEstadoAtual(atm.getStateNoCard());
+        atm.setActualState(atm.getStateNoCard());
     }
 
     @Override
@@ -39,25 +39,26 @@ public class StateAuthenticated implements ATMState {
             throw new InvalidValueException(valor);
         }
 
-        if (valor > atm.getSaldoConta()) {
-            throw new InsuficientBalanceException(atm.getSaldoConta());
+        if (valor > atm.getAccountBalance()) {
+            throw new InsuficientBalanceException(atm.getAccountBalance());
         }
 
         if (NoteFactory.atmEmpty()) {
-            atm.setEstadoAtual(atm.getStateNoMoney());
+            atm.setActualState(atm.getStateNoMoney());
             atm.requestWithdraw(valor);
             return;
         }
-        IDispenser dispenser = DispenserChainBuilder.build();
+        IHandler handler = HandlerChainBuilder.build();
 
-        try {
-            System.out.println("Solicitando: R$" + valor);
-            dispenser.dispense(valor);
-        } catch (CantDispense e) {
-            System.out.println(e.getMessage());
-        }
+        System.out.println("Solicitando: R$" + valor);
+        int dispensed = handler.dispense(valor);
 
-        atm.debitarConta(valor);
-        System.out.println("Saldo atualizado: R$" + atm.getSaldoConta());
+        atm.debitAccount(dispensed);
+        System.out.println("Saldo atualizado: R$" + atm.getAccountBalance());
+    }
+
+    @Override
+    public String getStateName() {
+        return "AUTENTICADO";
     }
 }

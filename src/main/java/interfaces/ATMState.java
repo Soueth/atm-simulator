@@ -9,4 +9,5 @@ public interface ATMState {
     void ejectCard();
     void insertPIN(String pin) throws WrongPINEjectCardException;
     void requestWithdraw(int valor) throws InvalidValueException, InsuficientBalanceException;
+    String getStateName();
 }
