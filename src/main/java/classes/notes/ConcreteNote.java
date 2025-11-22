@@ -3,7 +3,7 @@ package classes.notes;
 import enums.NoteValue;
 import exceptions.DepositLessZeroException;
 import exceptions.RemoveMoreHaveException;
-import exceptions.RemoveLeseZeroException;
+import exceptions.RemoveLessZeroException;
 import interfaces.INote;
 
 public class ConcreteNote implements INote {
@@ -27,14 +27,14 @@ public class ConcreteNote implements INote {
     @Override
     public void deposit(int qtd) throws DepositLessZeroException {
         if (qtd <= 0) {
-            throw new DepositLessZeroException(value);
+            throw new DepositLessZeroException(qtd, value);
         }
         this.qtd += qtd;
     }
 
     @Override
-    public void remove(int qtd) throws RemoveMoreHaveException, RemoveLeseZeroException {
-        if (qtd <= 0) throw new RemoveLeseZeroException(this.value);
+    public void remove(int qtd) throws RemoveMoreHaveException, RemoveLessZeroException {
+        if (qtd <= 0) throw new RemoveLessZeroException(this.value);
         if (this.qtd < qtd) throw new RemoveMoreHaveException(this.value, qtd);
 
         this.qtd -= qtd;

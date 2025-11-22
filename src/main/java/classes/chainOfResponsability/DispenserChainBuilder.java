@@ -29,6 +29,6 @@ public class DispenserChainBuilder {
         d5.setNext(d2);
         d2.setNext(d1);
 
-        return d100; // devolve o primeiro da cadeia
+        return d200;
     }
 }

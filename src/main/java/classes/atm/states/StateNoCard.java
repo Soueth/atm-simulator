@@ -2,6 +2,8 @@ package classes.atm.states;
 
 import classes.atm.ATM;
 import classes.notes.NoteFactory;
+import exceptions.InsuficientBalanceException;
+import exceptions.InvalidValueException;
 import interfaces.ATMState;
 
 public class StateNoCard implements ATMState {
@@ -29,7 +31,7 @@ public class StateNoCard implements ATMState {
     }
 
     @Override
-    public void requestWithdraw(int valor) {
+    public void requestWithdraw(int valor) throws InvalidValueException, InsuficientBalanceException {
         if (NoteFactory.atmEmpty()) {
             atm.setEstadoAtual(atm.getStateNoMoney());
             atm.requestWithdraw(valor);

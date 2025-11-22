@@ -4,6 +4,8 @@ import classes.atm.ATM;
 import classes.chainOfResponsability.DispenserChainBuilder;
 import classes.notes.NoteFactory;
 import exceptions.CantDispense;
+import exceptions.InsuficientBalanceException;
+import exceptions.InvalidValueException;
 import interfaces.ATMState;
 import interfaces.IDispenser;
 
@@ -32,15 +34,13 @@ public class StateAuthenticated implements ATMState {
     }
 
     @Override
-    public void requestWithdraw(int valor) {
+    public void requestWithdraw(int valor) throws InvalidValueException, InsuficientBalanceException {
         if (valor <= 0) {
-            System.out.println("Valor inválido.");
-            return;
+            throw new InvalidValueException(valor);
         }
 
         if (valor > atm.getSaldoConta()) {
-            System.out.println("Saldo insuficiente. Saldo disponível: R$" + atm.getSaldoConta());
-            return;
+            throw new InsuficientBalanceException(atm.getSaldoConta());
         }
 
         if (NoteFactory.atmEmpty()) {

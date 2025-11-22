@@ -2,6 +2,9 @@ package classes.atm.states;
 
 import classes.atm.ATM;
 import classes.notes.NoteFactory;
+import exceptions.InsuficientBalanceException;
+import exceptions.InvalidValueException;
+import exceptions.WrongPINEjectCardException;
 import interfaces.ATMState;
 
 public class StateWithCard implements ATMState {
@@ -27,23 +30,24 @@ public class StateWithCard implements ATMState {
     }
 
     @Override
-    public void insertPIN(String pin) {
+    public void insertPIN(String pin) throws WrongPINEjectCardException {
         if (atm.validarPIN(pin)) {
             System.out.println("PIN correto. Escolha uma operação.");
             atm.setEstadoAtual(atm.getStateAuthenticated());
             tentativas = 0;
         } else {
             tentativas++;
-            System.out.println("PIN incorreto. Tentativa " + tentativas + "/" + MAX_TENTATIVAS);
-            if (tentativas >= MAX_TENTATIVAS) {
-                System.out.println("Máximo de tentativas atingido. Cartão ejetado.");
-                atm.setEstadoAtual(atm.getStateNoCard());
+            if (tentativas < MAX_TENTATIVAS) {
+                System.out.println("PIN incorreto. Tentativa " + tentativas + "/" + MAX_TENTATIVAS);
+                return;
             }
+            atm.setEstadoAtual(atm.getStateNoCard());
+            throw new WrongPINEjectCardException();
         }
     }
 
     @Override
-    public void requestWithdraw(int valor) {
+    public void requestWithdraw(int valor) throws InvalidValueException, InsuficientBalanceException {
         if (NoteFactory.atmEmpty()) {
             atm.setEstadoAtual(atm.getStateNoMoney());
             atm.requestWithdraw(valor);
