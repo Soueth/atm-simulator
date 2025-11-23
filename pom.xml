@@ -12,7 +12,6 @@
     <name>atm-simulator</name>
     <url>http://maven.apache.org</url>
 
-    <!-- Aqui você define JDK 21 -->
     <properties>
         <maven.compiler.release>21</maven.compiler.release>
     </properties>
@@ -28,7 +27,6 @@
 
     <build>
         <plugins>
-            <!-- Plugin do compilador - versão moderna -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
