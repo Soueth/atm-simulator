@@ -3,7 +3,6 @@ package classes.atm.states;
 import classes.atm.ATM;
 import classes.chainOfResponsability.HandlerChainBuilder;
 import classes.notes.NoteFactory;
-import exceptions.CantDispense;
 import exceptions.InsuficientBalanceException;
 import exceptions.InvalidValueException;
 import interfaces.ATMState;

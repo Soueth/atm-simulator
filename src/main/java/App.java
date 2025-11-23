@@ -2,7 +2,6 @@ import java.util.Scanner;
 
 import classes.atm.ATM;
 import classes.notes.NoteFactory;
-import exceptions.CantDispense;
 import exceptions.InsuficientBalanceException;
 import exceptions.InvalidValueException;
 import exceptions.WrongPINEjectCardException;
