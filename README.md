@@ -59,16 +59,16 @@ Compilar o projeto:
 mvn package
 ```
 
-Rodar os testes:
-
-```bash
-mvn test
-```
-
 Executar a aplicação (classe principal `App` no pacote default):
 
 ```bash
 java -cp target/classes App
+```
+
+ou, se preferir com o plugin de execução do Maven
+
+```bash
+mvn exec:java
 ```
 
 Observações
